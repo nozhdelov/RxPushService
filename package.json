@@ -1,0 +1,22 @@
+{
+  "name": "web-push-service",
+  "version": "0.0.1",
+  "description": "send web psuh notifications",
+  "main": "server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "web-push":"*",
+    "redis": "*",
+    "rxjs": "*",
+    "express":"*",
+    "command-line-args" : "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivan Nozhdelov",
+  "license": "MIT"
+}

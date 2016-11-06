@@ -1,0 +1,18 @@
+{
+  "short_name" : "Test App",
+  "name": "Test App",
+
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "gcm_sender_id" : "1059165960735",
+
+  
+  "icons": [
+    {
+      "src": "/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+    
+  ]
+}

@@ -1,0 +1,109 @@
+<html>
+
+        <head>
+                <link rel="manifest" href="manifest.json">
+                <script  src="https://code.jquery.com/jquery-3.1.1.min.js"  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
+
+                <style>
+                        #log > p{
+                                margin : 0;
+                                font-size:16px;
+                        }
+
+                        .hidden {
+                                display:none;
+                        }
+                </style>
+        </head>
+
+
+        <body> 
+                <h1>WebPush Testt App</hi>
+                <div id="log"></div>
+                <input type="button" id="registerBtn" value="Register For Notifications" />
+                <div id="sendDetails" class="hidden" >
+                        <textarea id="payload" ></textarea>
+                        <input type="button" id="sendMessageBtn" value="Send Message"  />
+                </div>
+
+
+                <script>
+                        var USER_ID = 2;
+                        var TIME = 123456;
+                        var HASH = '65b816a2a38de9e6ce9bb4d7cd9e0fe6';
+                        var API_KEY = 'jflkLKDFJF87dsfyF&Df8s7df--sdjfhFHDIyfhsdi';
+                        if ('serviceWorker' in navigator) {
+                                log('Service Worker is supported :)');
+                                navigator.serviceWorker.register('sw.js', {scope : '/testapp/'}).then(function(registration) {
+                                        log('ServiceWorker registration successful with scope: ' + registration.scope);
+
+                                        
+                                }).catch(function(err) {
+                                        log('Service worker registration failed: ' + err);
+                                });
+
+
+                                $('#sendMessageBtn').on('click', function(){
+                                        log('Sending message to server....');
+                                        var data = {
+                                                userId : USER_ID,
+                                                apiKey : API_KEY,
+                                                time : TIME,
+                                                hash : HASH,
+                                                payload : $('#payload').val()
+                                        };
+
+                                        $.get('/send', data).done(function(response){
+                                                log('Server responded with : ' + response);
+                                         }).fail(function(err){
+                                               log('Could not send data to server : ' + err);
+                                        });
+                                });
+
+
+                                $('#registerBtn').on('click', function(){
+                                        navigator.serviceWorker.ready.then(function(registration){
+                                                
+                                                registration.pushManager.subscribe({
+                                                        userVisibleOnly: true
+                                                }).then(function(sub) {
+                                                log('Push permission request successful ... sending data to server '); 
+                                                data = {
+                                                        registration : JSON.stringify(sub),
+                                                        userId : USER_ID,
+                                                        apiKey : API_KEY,
+                                                        time : TIME,
+                                                        hash : HASH
+                                                        };
+                                                $.get('/register', data).done(function(response){
+                                                        $('#sendDetails').removeClass('hidden');
+                                                        log('Server responded with : ' + response);
+                                                }).fail(function(err){
+                                                                log('Could not send data to server : ' + err);
+                                                });
+                                                }).catch(function(err){
+                                                        log('Push permission request failed: ' + err);
+                                                });
+                                        });
+                                        
+
+                                                
+                                });
+
+                                
+                        } else {
+                                log('Service Worker not supported :(');
+                        }
+
+                        function log(message){
+                                $('#log').append('<p>' + message + '</p>');
+                        }
+
+                        
+
+                </script>
+        </body>
+
+
+</html>
