@@ -3,7 +3,7 @@
         <head>
                 <link rel="manifest" href="manifest.json">
                 <script  src="https://code.jquery.com/jquery-3.1.1.min.js"  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-
+                <script  src="https://cdn.rawgit.com/blueimp/JavaScript-MD5/master/js/md5.js" ></script>
 
                 <style>
                         #log > p{
@@ -30,9 +30,11 @@
 
                 <script>
                         var USER_ID = Math.round(Math.random() * 10000);
-                        var TIME = 123456;
-                        var HASH = '65b816a2a38de9e6ce9bb4d7cd9e0fe6';
+                        var TIME = Date.now();
                         var API_KEY = 'jflkLKDFJF87dsfyF&Df8s7df--sdjfhFHDIyfhsdi';
+                        var API_SECRET = 'FLKDJ$%#FLDfiusdhgfdjgh9384hfs';
+                        //clearly this is not to be done on the client :)
+                        var HASH = md5(USER_ID + ':' + API_KEY +  ':' + TIME + ':' + API_SECRET);
                         if ('serviceWorker' in navigator) {
                                 log('Service Worker is supported :)');
                                 navigator.serviceWorker.register('sw.js', {scope : '/testapp/'}).then(function(registration) {
