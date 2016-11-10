@@ -24,7 +24,7 @@ var config = require('./config.js').load(options.env || 'production');
 
 
 
-var app$ = new AppObservable();
+var app$ = new AppObservable(config.port);
 var storage = new Storage(config.redisHost, config.redisPort);
 var push$ = new PushObservable();
 var auth = new AuthHelper(config.API_KEYS);
@@ -57,7 +57,7 @@ app$.route('/register/').filter(function(requestData){
 	function(regData){
 		storage.saveRegistration(regData);
 	}, function(err){
-		console.log('ERROR 2 : ', err);
+		console.log('ERROR : ', err);
 	}
 );
 
@@ -86,7 +86,7 @@ app$.route('/send/').filter(function(requestData){
 		console.log('SEND ERROR : ', err.body);
 		return Rx.Observable.empty();
 	});
-}).subscribe(function(sendResult){});
+}).retry().subscribe(function(sendResult){});
 
 
 
@@ -96,7 +96,6 @@ app$.route('/send/').filter(function(requestData){
 app$.staticRoute('/testapp', 'testapp');
 
 
-app$.start(config.port);
 
 
 

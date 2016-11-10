@@ -1,11 +1,23 @@
 'use strict';
 var Rx = require('rxjs');
 var express = require('express');
+var https = require('https');
+var fs = require('fs');
 var app = express();
 
-function AppObservable(){
+
+function AppObservable(port){
         this.routes = [];
         this.app = app;
+
+        var privateKey = fs.readFileSync( 'key.pem' );
+        var certificate = fs.readFileSync( 'cert.pem' );
+
+        https.createServer({
+        key: privateKey,
+        cert: certificate,
+        passphrase : '1234'
+        }, app).listen(port);
         
 }
 
