@@ -62,6 +62,36 @@ app$.route('/register/').filter(function(requestData){
 );
 
 
+app$.route('/register/').filter(function(requestData){
+	requestData.project = auth.getProjectNameByKey(requestData.params.apiKey);
+	try {
+		auth.authenticate(requestData.params);
+		requestData.response.send('OK');
+		return true;
+	} catch(err){
+		requestData.response.send(err.message);
+		return false;
+	}
+	
+}).map(function(requestData){
+	var regData = JSON.parse(requestData.params.registration);
+	regData.userId = requestData.params.userId;
+	regData.project = requestData.project;
+
+	return regData;
+}).switchMap(function(regData){	
+	return storage.registrationExists(regData.project, regData.userId, regData.endpoint);
+}, function(outerValue, innerValue){
+	return {exists : innerValue, regData : outerValue};
+}).filter(function(data){
+	return !data.exists;
+}).pluck('regData').retry().subscribe(
+	function(regData){
+		storage.removeRegistration(regData);
+	}
+);
+
+
 
 
 app$.route('/send/').filter(function(requestData){

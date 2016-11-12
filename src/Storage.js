@@ -68,6 +68,21 @@ Storage.prototype.saveRegistration = function(registrationData){
 };
 
 
+Storage.prototype.removeRegistration = function(registrationData){
+        var project = registrationData.project;
+        var registrationId = this.generateRegistrationId(project, registrationData.userId, registrationData.endpoint);
+    
+        var transaction = this.client.multi();
+        transaction.del(project + '::registrations::' + registrationId);
+        transaction.lrem(project + '::userRegistrations::' + registrationData.userId, 1, registrationId);
+        transaction.exec(function(err, results){
+                if(err){
+                        console.log(err);
+                }
+        });
+};
+
+
 Storage.prototype.generateRegistrationId = function(project, userId, endpoint){
         return Crypto.createHash('md5').update(project + ':' + userId + ':' + endpoint).digest('hex');
 };
