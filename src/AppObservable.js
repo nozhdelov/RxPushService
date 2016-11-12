@@ -10,18 +10,18 @@ function AppObservable(port){
         this.routes = [];
         this.app = app;
 
-        var privateKey = fs.readFileSync( 'key.pem' );
-        var certificate = fs.readFileSync( 'cert.pem' );
-/*
+        var privateKey = fs.readFileSync( 'key.key' );
+        var certificate = fs.readFileSync( 'cert.crt' );
+
         https.createServer({
         key: privateKey,
         cert: certificate,
         passphrase : '1234'
         }, app).listen(port, function(){
                 console.log('Listening on port ', port);
-        });*/
+        });
 
-        this.start(port);
+      //  this.start(port);
         
 }
 
