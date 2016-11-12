@@ -17,7 +17,9 @@ function AppObservable(port){
         key: privateKey,
         cert: certificate,
         passphrase : '1234'
-        }, app).listen(port);
+        }, app).listen(port, function(){
+                console.log('Listening on port ', port);
+        });
         
 }
 
