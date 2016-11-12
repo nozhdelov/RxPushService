@@ -120,13 +120,11 @@ app$.route('/send/').filter(function(requestData){
 
 
 
-app$.route('/certVer/payHEOgCuyqeLAsvkLaHxfSLTgoxnzntJSwaMtmgHpc/').filter(function(requestData){
-	requestData.response.send('payHEOgCuyqeLAsvkLaHxfSLTgoxnzntJSwaMtmgHpc');
-}).subscribe(function(){});
+
 
 
 app$.staticRoute('/testapp', 'testapp');
-app$.staticRoute('/certVer', 'certVer');
+app$.staticRoute('/.well-known', '.well-known/');
 
 
 
