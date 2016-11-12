@@ -124,7 +124,7 @@ app$.route('/send/').filter(function(requestData){
 
 
 app$.staticRoute('/testapp', 'testapp');
-app$.staticRoute('/cert', 'cert');
+app$.staticRoute('/certVer', 'certVer');
 
 
 
