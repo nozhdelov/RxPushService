@@ -12,14 +12,16 @@ function AppObservable(port){
 
         var privateKey = fs.readFileSync( 'key.pem' );
         var certificate = fs.readFileSync( 'cert.pem' );
-
+/*
         https.createServer({
         key: privateKey,
         cert: certificate,
         passphrase : '1234'
         }, app).listen(port, function(){
                 console.log('Listening on port ', port);
-        });
+        });*/
+
+        this.start(port);
         
 }
 
