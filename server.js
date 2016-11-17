@@ -62,7 +62,7 @@ app$.route('/register/').filter(function(requestData){
 );
 
 
-app$.route('/register/').filter(function(requestData){
+app$.route('/unregister/').filter(function(requestData){
 	requestData.project = auth.getProjectNameByKey(requestData.params.apiKey);
 	try {
 		auth.authenticate(requestData.params);
