@@ -12,6 +12,9 @@ function Storage(host, port){
                 host : this.host,
                 port : this.port
         });
+
+        this.client.select(3, function() {});
+
 }
 
 
