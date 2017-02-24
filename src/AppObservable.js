@@ -11,17 +11,11 @@ function AppObservable(port){
         this.routes = [];
         this.app = app;
 
-        var privateKey = fs.readFileSync( 'key.key' );
-        var certificate = fs.readFileSync( 'cert.crt' );
-/*
-        https.createServer({
-                key: privateKey,
-                cert: certificate,
-                passphrase : '1234'
-        }, app).listen(port, function(){
-                console.log('Listening on port ', port);
+        this.app.use(function(req, res, next) {
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                next();
         });
-*/
         this.start(port);
         
 }

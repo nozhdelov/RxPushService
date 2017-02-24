@@ -18,6 +18,10 @@ var Config = {
                 'TestApp' : {
                         key : 'jflkLKDFJF87dsfyF&Df8s7df--sdjfhFHDIyfhsdi',
                         secret : 'FLKDJ$%#FLDfiusdhgfdjgh9384hfs'
+                },
+                'khanwars' : {
+                        key : 'ksfdsdfskdjf2jdfh&DF^*SDFYH$WHRDWS)FYDFLSDF64651',
+                        secret : '#$%^&*JGGF46546546JHDSKFHKDSHFKHKJkjdhsfkhsd'
                 } 
         }
 };
