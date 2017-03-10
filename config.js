@@ -10,7 +10,7 @@ var Config = {
                 production : {
                         port : 80,
                         redisHost : '127.0.0.1',
-                        redisPort : 6379
+                        redisPort : 9999
                 },
         },
 
