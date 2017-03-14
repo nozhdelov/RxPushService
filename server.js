@@ -111,7 +111,7 @@ app$.route('/send/').filter(function(requestData){
 }, function(outerValue, innerValue){
 	return {registration : innerValue, params : outerValue.params };
 }).switchMap(function(data){
-
+	Storage.incrDayMessageCount(params.project);
 	return push$.send(data.registration, data.params.payload).catch(function(err){
 		console.log('SEND ERROR : ', err.body);
 		return Rx.Observable.empty();
