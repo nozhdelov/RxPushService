@@ -117,7 +117,7 @@ Storage.prototype.getRegistrations = function(project, userId){
 
 Storage.prototype.incrDayMessageCount = function(project){
         var date = new Date();
-        var key = 'messagesPerDay::' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        var key = project + '::messagesPerDay::' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         this.client.incr(key);
 }
 
