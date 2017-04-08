@@ -5,7 +5,7 @@ var webpush = require('web-push');
 
 function PushObservable(){
         this.pushService = webpush;
-        this.pushService.setGCMAPIKey('AIzaSyDeIv7Ob-Da-mZYdbzOeObZ7OtcG68AGZw');
+        this.pushService.setGCMAPIKey('**************************************');
 
 }
 
